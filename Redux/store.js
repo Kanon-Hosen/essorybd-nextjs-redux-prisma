@@ -1,9 +1,13 @@
-import OneProductSlice from "./ProductSlice/OneProductSlice";
+// import OneProductSlice from "./ProductSlice/OneProductSlice";
+import cartReducer from "./cart/cartSlice";
+import CounterReducer from "./counterSlice/CounterSlice";
 
 const { configureStore } = require("@reduxjs/toolkit");
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    oneProductR: OneProductSlice,
+    counter: CounterReducer,
+    cartR : cartReducer
   },
 });
+export default store;
