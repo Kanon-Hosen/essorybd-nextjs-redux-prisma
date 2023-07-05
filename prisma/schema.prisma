@@ -10,12 +10,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Products {
-//   id  String 
-//   name  String
-//   image String
-//   price Int
-//   discountPrice Int
-
-
+// model User {
+//   id     String @id @default(auto()) @map("_id") @db.ObjectId
+//   name   String
+//   email  String @unique
+//   post   Post   @relation(fields: [postId], references: [id])
+//   postId String @db.ObjectId
 // }
+
+// model Post {
+//   id   String @id @default(auto()) @map("_id") @db.ObjectId
+//   User User[]
+//   name String
+// }
+model product {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String
+  image        String
+  category     String
+  price        Int
+  discount     Int?
+  discountType String?
+  quantity     String
+  stockType    stock   @default(IN_STOCK)
+  tags         String
+  status       status  @default(PUBLISHED)
+  totalReview  Int     @default(0)
+  reviewPoints Int     @default(0)
+}
+
+enum status {
+  PUBLISHED
+  DRAFT
+}
+
+enum stock {
+  IN_STOCK
+  OUT_OF_STOCK
+}
+
+//  model Category{
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String
+//   SubCategory String
+//  }
+
+//  model Users{
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String
+//   email String @unique
+//   phone String
+//   address String
+//   verified  verifiedStatus @default(FALSE)
+//   role Role @default(USER)
+//  }
+
+//  enum verifiedStatus{
+//     TRUE
+//     FALSE
+//  }
+
+//  enum Role{
+//   USER
+//   ADMIN
+//  }
+
+//  model Brand{
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String
+//  }
