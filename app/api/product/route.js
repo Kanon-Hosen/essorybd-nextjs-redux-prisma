@@ -7,7 +7,7 @@ export async function GET() {
   try {
     await main();
     const products = await prisma.product.findMany();
-    const all = await [...products]?.reverse();
+    const all = await [...products].reverse();
     return Response.json({
       success: true,
       message: ` ${products?.length} Product found`,

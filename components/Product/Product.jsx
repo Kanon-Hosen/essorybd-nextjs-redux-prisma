@@ -2,10 +2,10 @@
 
 import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
-import Headphone from "../../images/headphone.jpeg";
-import watch from "../../images/smart-watch.jpg";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import Headphone from "../../images/headphone.jpeg";
+// import watch from "../../images/smart-watch.jpg";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "@/Redux/ProductSlice/manyProduct.slice";
 
@@ -17,6 +17,8 @@ const Product = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  console.log(products)
 
   if (productsLoading) {
     return (
@@ -39,7 +41,7 @@ const Product = () => {
 
   if (productsError) {
     return (
-      <div className="text-center font-semibold text-xl mt-8 text-slate-900">
+      <div className="text-center font-semibold text-xl my-14 text-slate-900">
         Something went wrong
       </div>
     );

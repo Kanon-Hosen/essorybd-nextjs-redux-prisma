@@ -2,11 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
-export const getProducts = createAsyncThunk("products/getProducts", async () => {
-  const response = await fetch("http://localhost:3000/api/product");
-  const data = await response.json();
-  return data;
-});
+export const getProducts = createAsyncThunk(
+  "products/getProducts",
+  async () => {
+    const response = await fetch("http://localhost:3000/api/product/");
+    const data = await response.json();
+    return data;
+  }
+);
 
 export const ProductsSlice = createSlice({
   name: "products",
@@ -29,6 +32,5 @@ export const ProductsSlice = createSlice({
     });
   },
 });
-
 
 export default ProductsSlice.reducer;

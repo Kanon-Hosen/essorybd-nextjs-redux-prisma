@@ -10,34 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id     String @id @default(auto()) @map("_id") @db.ObjectId
-//   name   String
-//   email  String @unique
-//   post   Post   @relation(fields: [postId], references: [id])
-//   postId String @db.ObjectId
-// }
-
-// model Post {
-//   id   String @id @default(auto()) @map("_id") @db.ObjectId
-//   User User[]
-//   name String
-// }
 model product {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   description  String
   image        String
-  category     String
-  price        Int
-  discount     Int?
+  category     String   @unique
+  price        String
+  discount     String?
   discountType String?
   quantity     String
-  stockType    stock   @default(IN_STOCK)
+  stockType    stock    @default(IN_STOCK)
   tags         String
-  status       status  @default(PUBLISHED)
-  totalReview  Int     @default(0)
-  reviewPoints Int     @default(0)
+  status       status   @default(PUBLISHED)
+  totalReview  Int      @default(0)
+  reviewPoints Int      @default(0)
+  // Category     category @relation(fields: [categoryId], references: [id])
+  // categoryId   String   @db.ObjectId
 }
 
 enum status {
@@ -50,31 +39,32 @@ enum stock {
   OUT_OF_STOCK
 }
 
-//  model Category{
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   name String
-//   SubCategory String
-//  }
+model category {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  SubCategory String
+  // Product     product[]
+}
 
-//  model Users{
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   name String
-//   email String @unique
-//   phone String
-//   address String
-//   verified  verifiedStatus @default(FALSE)
-//   role Role @default(USER)
-//  }
+model users {
+  id       String         @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String         @unique
+  phone    String?
+  address  String?
+  verified verifiedStatus @default(FALSE)
+  role     Role           @default(USER)
+}
 
-//  enum verifiedStatus{
-//     TRUE
-//     FALSE
-//  }
+enum verifiedStatus {
+  TRUE
+  FALSE
+}
 
-//  enum Role{
-//   USER
-//   ADMIN
-//  }
+enum Role {
+  USER
+  ADMIN
+}
 
 //  model Brand{
 //   id String @id @default(auto()) @map("_id") @db.ObjectId
