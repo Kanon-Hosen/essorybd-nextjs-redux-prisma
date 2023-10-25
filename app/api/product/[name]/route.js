@@ -1,18 +1,16 @@
 import { main } from "@/utils/dbConnect";
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+const Prisma = new PrismaClient();
 
 export async function GET(req, res) {
   try {
     await main();
-    const id = req?.url.split("/product/")[1];
-    const product = await prisma.product.findUnique({
-      where: {
-        id: id,
-      },
-    });
+    const name = req?.url.split("/product/")[1];
+    const n = decodeURI(name)
+    const product = await Prisma.product.findUnique({
+      where:{name: n}
+    })
 
-    if (product?.data) {
       return Response.json(
         {
           success: true,
@@ -20,16 +18,8 @@ export async function GET(req, res) {
           data: product,
         },
         { status: 200 }
-      );
-    }
-    return Response.json(
-      {
-        success: false,
-        message: "Product not found",
-        data: null,
-      },
-      { status: 404 }
     );
+    
   } catch (error) {
     return Response.json(
       {

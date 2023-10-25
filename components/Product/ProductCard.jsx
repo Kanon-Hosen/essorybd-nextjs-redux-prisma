@@ -1,5 +1,6 @@
 "use client";
 import { addToCart } from "@/Redux/cart/cartSlice";
+import { addWishlist } from "@/Redux/wishlist/wishlist";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -9,12 +10,17 @@ import { useDispatch } from "react-redux";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+
+
+
+
+
   return (
-    <div className="bg-[#F5F5F5] z-0 relative group shadow-md border-2 border-gray-100">
+    <div className="bg-[#F5F5F5] overflow-hidden z-0 relative group shadow-md border-2 border-gray-100">
       <div className="w-full overflow-hidden relative">
         <Image
-          className=" group-hover:scale-105 transition-transform duration-300 bg-[#F5F5F5]"
-          src={product?.image}
+          className=" group-hover:scale-105 bg-cover bg-center transition-transform duration-300 bg-[#F5F5F5]"
+          src={product?.images[0]}
           width={500}
           height={500}
           alt={product?.name}
@@ -27,7 +33,7 @@ const ProductCard = ({ product }) => {
                   name: product?.name,
                   id: product?.id,
                   price: product?.price,
-                  image: product?.image,
+                  image: product?.images[0],
                   quantity: 1,
                 })
               )
@@ -36,7 +42,7 @@ const ProductCard = ({ product }) => {
           >
             <BsFillCartPlusFill />
           </button>
-          <button className="bg-white focus:bg-orange-500 focus:text-white  text-black font-semibold text-2xl p-3 hover:bg-orange-500 hover:text-white transition-opacity rounded-full ">
+          <button onClick={()=>dispatch(addWishlist(product))} className="bg-white focus:bg-orange-500 focus:text-white  text-black font-semibold text-2xl p-3 hover:bg-orange-500 hover:text-white transition-opacity rounded-full ">
             <BsHeart />
           </button>
         </div>
@@ -52,10 +58,12 @@ const ProductCard = ({ product }) => {
           <p className="inline-block text-slate-900 font-bold">
             {product?.price} tk
           </p>
-          <span className="inline-block line-through text-neutral-600">
+          {
+            product?.discountParcent && <span className="inline-block line-through text-neutral-600">
             {" "}
-            {(Number(product?.price) / 100) * Number(product?.discount)} tk
+            { Number(product?.price) + (Number(product?.price) / 100) * Number(product?.discountParcent)} tk
           </span>
+          }
         </div>
         {product?.reviewPoints > 0 && (
           <div className=" flex gap-1 items-center">
@@ -80,9 +88,9 @@ const ProductCard = ({ product }) => {
           </div>
         )}
       </Link>
-      {product?.discount && (
+      {product?.discountParcent && (
         <div className="w-14 h-14 absolute top-3 z-30 right-3 flex items-center justify-center rounded-full bg-orange-500 text-white font-semibold">
-          <p>- {product?.discount}%</p>
+          <p>- {product?.discountParcent}%</p>
         </div>
       )}
     </div>

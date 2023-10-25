@@ -11,22 +11,24 @@ datasource db {
 }
 
 model product {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  description  String
-  image        String
-  category     String   @unique
-  price        String
-  discount     String?
-  discountType String?
-  quantity     String
-  stockType    stock    @default(IN_STOCK)
-  tags         String
-  status       status   @default(PUBLISHED)
-  totalReview  Int      @default(0)
-  reviewPoints Int      @default(0)
-  // Category     category @relation(fields: [categoryId], references: [id])
-  // categoryId   String   @db.ObjectId
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String   @unique
+  description     String
+  images          String[]
+  category        String   @unique
+  price           Int
+  discountParcent Int?
+  discountType    String?  @unique
+  quantity        Int
+  stockType       stock    @default(IN_STOCK)
+  tags            String
+  status          status   @default(PUBLISHED)
+  totalReview     Int      @default(0)
+  reviewPoints    Int      @default(0)
+  SKU             Int?     @unique
+  createDate      DateTime @default(now())
+  Category        category @relation(fields: [categoryId], references: [id])
+  categoryId      String   @db.ObjectId
 }
 
 enum status {
@@ -42,8 +44,8 @@ enum stock {
 model category {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  SubCategory String
-  // Product     product[]
+  SubCategory String?
+  Product     product[]
 }
 
 model users {
