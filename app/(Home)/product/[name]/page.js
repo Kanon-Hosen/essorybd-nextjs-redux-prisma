@@ -124,7 +124,7 @@ const ProductDetails = ({ params }) => {
             dangerouslySetInnerHTML={{ __html: product?.description }}
           ></p>
           <div className="flex items-center gap-8 mt-7">
-            <div className="px-4 py-3 border-2 rounded-xl text-xl font-semibold text-slate-900 border-neutral-900 grid grid-cols-3 gap-3 w-28 ">
+            <div className="px-4 py-2 border-2 rounded-xl text-xl font-semibold text-slate-900 border-neutral-900 grid grid-cols-3 gap-3 w-28 ">
               <div
                 className="cursor-pointer "
                 onClick={() => {
@@ -155,44 +155,44 @@ const ProductDetails = ({ params }) => {
                   })
                 )
               }
-              className="bg-black px-9 py-4 text-white rounded-lg hover:bg-orange-500 transition-colors focus:bg-orange-500 border-none outline-none font-semibold"
+              className="bg-black px-9 py-3 text-white rounded-lg hover:bg-orange-500 transition-colors focus:bg-orange-500 border-none outline-none font-semibold"
             >
               Add To Cart
             </button>
-            <button
+            {/* <button
               onClick={() => handleRoute(product)}
               className="bg-orange-500 px-9 py-4 text-white rounded-lg hover:bg-orange-500 transition-colors focus:bg-orange-700 border-none outline-none font-semibold"
             >
               Buy Now
-            </button>
+            </button> */}
           </div>
           <hr className="mt-6" />
 
-          <div className="w-82 flex flex-col gap-3 mt-6">
+          <div className="w-82 flex text-base flex-col gap-3 mt-6">
             <div className="grid grid-cols-4 gap-2 ">
-              <p className="font-medium text-lg text-neutral-700 col-span-1">
+              <p className="font-medium  text-neutral-700 col-span-1">
                 SKU
               </p>
-              <p className="font-medium text-lg text-neutral-700 w-8">:</p>
-              <p className="font-medium text-lg text-neutral-700 col-span-2">
+              <p className="font-medium  text-neutral-700 w-8">:</p>
+              <p className="font-medium  text-neutral-700 col-span-2">
                 {product?.SKU}
               </p>
             </div>
             <div className="grid grid-cols-4 gap-2 ">
-              <p className="font-medium text-lg text-neutral-700 col-span-1">
+              <p className="font-medium text-neutral-700 col-span-1">
                 Category
               </p>
-              <p className="font-medium text-lg text-neutral-700 w-8">:</p>
-              <p className="font-medium text-lg text-neutral-700 col-span-2">
+              <p className="font-medium  text-neutral-700 w-8">:</p>
+              <p className="font-medium  text-neutral-700 col-span-2">
                 {product?.category}
               </p>
             </div>
             <div className="grid grid-cols-4 gap-2 ">
-              <p className="font-medium text-lg text-neutral-700 col-span-1">
+              <p className="font-medium  text-neutral-700 col-span-1">
                 Tags
               </p>
-              <p className="font-medium text-lg text-neutral-700 w-8">:</p>
-              <p className="font-medium text-lg text-neutral-700 col-span-2">
+              <p className="font-medium text-neutral-700 w-8">:</p>
+              <p className="font-medium text-neutral-700 col-span-2">
                 {product?.tags}
               </p>
             </div>

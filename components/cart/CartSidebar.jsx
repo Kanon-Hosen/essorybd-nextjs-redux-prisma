@@ -2,6 +2,7 @@
 
 import { calculateAll, removeOneCart } from "@/Redux/cart/cartSlice";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { IoCloseCircle } from "react-icons/io5";
@@ -82,7 +83,7 @@ const CartSidebar = ({ setCartToggle, cartToggle }) => {
 
       {products.length > 0 && (
         <div className="fixed bottom-0 z-40 h-[19vh] bg-white border-t left-0 w-full px-6 pb-8">
-          <div className="flex items-center justify-between ">
+          <div className="flex items-center justify-between mt-2">
             <h1 className="text-slate-900 tex-xl ">Subtotal</h1>
             <div className="text-orange-500 font-medium ">{total} tk</div>
           </div>
@@ -91,9 +92,9 @@ const CartSidebar = ({ setCartToggle, cartToggle }) => {
             <button className="border-2 border-neutral-700 px-7 py-2 rounded-full hover:bg-black hover:text-white transition-colors hover:border-black">
               Cart
             </button>
-            <button className="bg-black border-none text-white hover:bg-orange-500 transition-colors  px-7 py-2 rounded-full">
+            <Link href='/checkout' className="bg-black border-none text-white hover:bg-orange-500 transition-colors  px-7 py-2 rounded-full">
               Checkout
-            </button>
+            </Link>
           </div>
         </div>
       )}

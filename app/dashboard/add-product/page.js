@@ -75,13 +75,16 @@ const Page = () => {
               <label htmlFor="" className="font-semibold text-neutral-800">
                 Description
               </label>
-              <Editor editorState={editorState} onChange={setEditorState} />
+              <textarea name="description" className="border p-3" id="" cols="30" rows="10"></textarea>
             </div>
           </div>
           <div className="shadow p-6 border w-full overflow-hidden bg-white rounded-md mt-4">
             <h1 className="text-lg font-semibold">Media</h1>
             <div className="mt-4 flex flex-col gap-2">
               <p className="font-semibold text-neutral-800">Photo</p>
+              <p className="text-gray-500 text-sm">
+                Please add at last 4 images
+              </p>
 
               <div className="grid md:grid-cols-3 gap-3">
                 {results?.map((r, i) => {
@@ -197,16 +200,19 @@ const Page = () => {
                 Product Category
               </label>
               <>
-                {
-                  categories?.length > 0 && categories.map(category => {
+                {categories?.length > 0 &&
+                  categories.map((category) => {
                     return (
-                      <div key={category?.id} onClick={() => setCta(category)} className="flex items-center gap-2">
+                      <div
+                        key={category?.id}
+                        onClick={() => setCta(category)}
+                        className="flex items-center gap-2"
+                      >
                         <input type="radio" name="cta" />
-                        <label htmlFor="cta"  >{category.name}</label>
+                        <label htmlFor="cta">{category.name}</label>
                       </div>
-                    )
-                  }) 
-                }
+                    );
+                  })}
               </>
             </div>
             <div className="flex flex-col gap-2 w-full mt-4">
@@ -231,10 +237,21 @@ const Page = () => {
                 <option name="" id="">
                   Select Status
                 </option>
-                <option defaultValue="PUBLISHED" classN ame="bg-green-500 p-1 text-white" name="" id="">
+                <option
+                  defaultValue="PUBLISHED"
+                  classN
+                  ame="bg-green-500 p-1 text-white"
+                  name=""
+                  id=""
+                >
                   PUBLISHED
                 </option>
-                <option defaultValue="DRAFT" className="bg-red-500 p-1 text-white" name="" id="">
+                <option
+                  defaultValue="DRAFT"
+                  className="bg-red-500 p-1 text-white"
+                  name=""
+                  id=""
+                >
                   DRAFT
                 </option>
               </select>
@@ -243,14 +260,24 @@ const Page = () => {
           <div className="shadow p-6 border w-full bg-white rounded-md mt-4">
             <h1 className="text-lg font-semibold">Stock Type</h1>
             <div className="flex flex-col gap-2 w-full mt-4">
-              <select name="stockType" className="border p-3" >
-                <option name="" id="" >
+              <select name="stockType" className="border p-3">
+                <option name="" id="">
                   Select Status
                 </option>
-                <option defaultValue="IN_STOCK" className="bg-green-500 p-2 text-white" name="" id="">
+                <option
+                  defaultValue="IN_STOCK"
+                  className="bg-green-500 p-2 text-white"
+                  name=""
+                  id=""
+                >
                   IN_STOCK
                 </option>
-                <option defaultValue="OUT_OF_STOCK" className="bg-red-500 p-2 text-white" name="" id="">
+                <option
+                  defaultValue="OUT_OF_STOCK"
+                  className="bg-red-500 p-2 text-white"
+                  name=""
+                  id=""
+                >
                   OUT_OF_STOCK
                 </option>
               </select>

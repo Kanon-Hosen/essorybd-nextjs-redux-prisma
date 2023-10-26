@@ -9,9 +9,12 @@ import { useSelector } from "react-redux";
 import { District } from "@/utils/district";
 import Link from "next/link";
 function Checkout() {
-  const state = useSelector((state) => state);
-  console.log(state);
+  const { products, total, isAdd } = useSelector((cart) => {
+    return cart.cartR;
+  });
   const [isChecked, setIsChecked] = useState(true);
+  const [payment, setPayment] = useState("COD");
+
   return (
     <div className="md:px-12 px-6 my-12">
       <div>
@@ -119,8 +122,12 @@ function Checkout() {
               <div className="mt-4">
                 <h1 className="font-semibold">Payment Options</h1>
                 <div className="mt-4 grid grid-cols-2 gap-4 h-full">
-                  <div className="flex items-center cursor-pointer gap-2 p-3 shadow-md rounded border">
-                    <input type="radio" name="payment" id="cash" />
+                  <div
+                    onClick={() => setPayment("COD")}
+                    className={` ${
+                      payment === "COD" && "border-2 border-orange-500"
+                    } flex hover:border-orange-500 transition-all hover:shadow-lg hover:border-2 items-center cursor-pointer gap-2 p-3 shadow-md rounded border`}
+                  >
                     <label
                       htmlFor="cash"
                       className="flex items-center cursor-pointer "
@@ -135,8 +142,12 @@ function Checkout() {
                       </span>
                     </label>
                   </div>{" "}
-                  <div className="flex items-center  gap-2 p-3 cursor-pointer shadow-md rounded border ">
-                    <input type="radio" name="payment" id="Bkash" />
+                  <div
+                    onClick={() => setPayment("BKASH")}
+                    className={` ${
+                      payment === "BKASH" && "border-2 border-orange-500"
+                    } flex hover:border-orange-500 transition-all hover:shadow-lg hover:border-2 items-center cursor-pointer gap-2 p-3 shadow-md rounded border`}
+                  >
                     <label
                       htmlFor="Bkash"
                       className="flex items-center cursor-pointer "
@@ -145,8 +156,12 @@ function Checkout() {
                       <span className="ml-2 font-semibold">Bkash Payment</span>
                     </label>
                   </div>{" "}
-                  <div className="flex items-center  gap-2 p-3 shadow-md cursor-pointer rounded border">
-                    <input type="radio" name="payment" id="Nogod" />
+                  <div
+                    onClick={() => setPayment("NOGOD")}
+                    className={` ${
+                      payment === "NOGOD" && "border-2 border-orange-500"
+                    } flex hover:border-orange-500 transition-all hover:shadow-lg hover:border-2 items-center cursor-pointer gap-2 p-3 shadow-md rounded border`}
+                  >
                     <label
                       htmlFor="Nogod"
                       className="flex items-center cursor-pointer "
@@ -155,8 +170,12 @@ function Checkout() {
                       <span className="ml-2 font-semibold">Nogod Payment</span>
                     </label>
                   </div>
-                  <div className="flex items-center  gap-2 p-3 shadow-md rounded border cursor-pointer">
-                    <input type="radio" name="payment" id="Visa" />
+                  <div
+                    onClick={() => setPayment("VISA")}
+                    className={` ${
+                      payment === "VISA" && "border-2 border-orange-500"
+                    } flex hover:border-orange-500 transition-all hover:shadow-lg hover:border-2 items-center cursor-pointer gap-2 p-3 shadow-md rounded border`}
+                  >
                     <label
                       htmlFor="Visa"
                       className="flex items-center cursor-pointer "
@@ -214,19 +233,32 @@ function Checkout() {
             <h1 className="font-semibold text-xl">Cart Overview</h1>
             <hr />
             <div className="my-6">
-              <h1 className="text-sm text-gray-500">
-                Mens Premium Jacket - Solstice (Black) ( M)
-              </h1>
-              <div className="flex items-center justify-between  mt-3">
-                <Image src={Bkash} alt="Bkash" className="w-24 border rounded-md bg-center bg-cover" />
-                <p>1 X ৳ 1700</p>
-              </div>
+              {products && products.map((p) => {
+                return (
+                  <div key={p?.id} className="mt-3">
+                    <h1 className="text-sm text-gray-500">{p?.name}</h1>
+                    <div className="flex items-center justify-between  mt-3">
+                      <Image
+                        src={p?.image}
+                        alt="Bkash"
+                        width={80}
+                        height={80}
+                        className="w-24 border rounded-md bg-center bg-cover"
+                      />
+                      <p>
+                        {p.quantity} X ৳ {p?.price}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+      
             </div>
             <hr />
             <div className="flex flex-col gap-4 my-6">
               <div className="flex items-center justify-between">
                 <p className="font-semibold">Total:</p>
-                <p className="text-orange-500 text-lg font-semibold">৳ 1700</p>
+                <p className="text-orange-500 text-lg font-semibold">৳ {total}</p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="font-semibold">Shipping (+):</p>
